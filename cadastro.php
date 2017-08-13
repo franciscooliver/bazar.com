@@ -1,3 +1,10 @@
+<?php
+    $nome = $_GET["erro_nome"];
+    $email = $_GET["erro_email"];
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -42,12 +49,23 @@
         <form method="post" action="cadastra_usuario.php" id="formCadastrarse">
           <div class="form-group">
             <input type="text" class="form-control" id="usuario" name="usuario_cad" placeholder="Usuário" required="required">
+            <?php
+
+                if($nome == 1){
+                  echo "<p style='color:#FF0000'>Nome de usuário já cadastrado em nosssa base de dados</p>";
+                }
+            ?>
 
           </div>
 
           <div class="form-group">
             <input type="email" class="form-control" id="email_cad" name="email_cad" placeholder="Email" required="required">
-          
+            <?php
+            if($email ==1 ){
+                echo "<p style='color:#FF0000'>Email de usuário já cadastrado em nosssa base de dados</p>";
+
+            }
+            ?>
             
           </div>
           
