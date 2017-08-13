@@ -1,6 +1,6 @@
 <?php
-    $nome = $_GET["erro_nome"];
-    $email = $_GET["erro_email"];
+    $nome = isset($_GET["erro_nome"]) ? $_GET["erro_nome"] :0;
+    $email = isset($_GET["erro_email"]) ? $_GET["erro_email"] :0;
 
 ?>
 
