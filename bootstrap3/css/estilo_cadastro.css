@@ -1,0 +1,29 @@
+html, body {
+	height: 100%;
+	overflow: auto;
+}
+body {
+	
+	
+	background-attachment: fixed;
+	font-family: Helvetica,Arial,sans-serif;
+	overflow-x: hidden;
+}
+
+footer{
+	margin-top: 50px;
+	background: #F8F8F8;
+	padding: 50px 0px 20px 0px;
+	position: relative;
+}
+footer a{
+	color: #607d8b;
+}
+
+.item-rede-social{
+	float: right;
+}
+
+ul.nav li a:hover{
+	background:transparent;
+}
