@@ -1,3 +1,18 @@
+    <?php
+      require_once('model/conexao.class.php');
+
+      $objDB = new conexao();
+      $link = $objDB->conectaBd();
+
+      $sql = "select * from produtos ".
+              "inner join img_vitrine iv on iv.id_imagem = produtos.fk_imagem";
+
+      $resultado_id = mysqli_query($link , $sql);
+     
+
+    ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -43,6 +58,16 @@
 
           });
 
+          $(function(){
+
+              $('#pesquisa').keyup( function(){
+                var pesquisa = $(this).val();
+
+                $(".resultado").html( pesquisa);
+              });
+
+          })
+
       });
     </script>
 
@@ -80,17 +105,32 @@
         <!-- navbar -->
         <div class="collapse navbar-collapse" id="barra-navegacao">
           
-        
-          <input id="campo_pesquisa" class=" form-control input_class" type="text"  placeholder="Pesquisar por produtos">
-                <button type="submit" class="btn btn-default"> <span class="glyphicon glyphicon-search"></span></button>
-            
+
+          <div class="col-sm-4 col-md-4 navbar-right">
+                    <form class="navbar-form" role="search" method="get" id="search-form" name="search-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar por produtos" id="pesquisa" name="query" value="">
+                            <div class="input-group-btn">
+                                <button type="submit" value="Search" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        </div>
+                          <br>
+                         <ul class="resultado">
+
+                        </ul>
+
+                    </form>
+
+
+                </div>
+                
           <ul class="nav navbar-nav navbar-right">
             
             <li><a href="">Início</a></li>
-            <li><a href="">Smartphones</a></li>
+            <li><a href="">Produtos</a></li>
             <li><a href="">Contato</a></li>
             <li><a href="cadastro.php">Cadastre-se</a></li>
-            <li><a href="#"  data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><button type="button" class="btn btn-warning">Sing-in</button></a>
+            <li><a href="#"  data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><button type="button" class="btn btn-warning" style="margin-top: -5px;">Sing-in</button></a>
               <ul class="dropdown-menu" aria-labelledby="entrar">
             <div class="col-md-12">
                 <p>Você possui uma conta?</h3>
@@ -167,61 +207,29 @@
     </div>
     
       <div class="container" id="config_container_imagens">
-        <div class="col-md-2  column productbox">
-          <img src="imagens/prod1.png" class="img-responsive ">
-          <div class="producttitle">Galaxy S7 edje - 64GB</div>
-          <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">R$ 8.95</div></div>
-      </div>
 
-        <div class="col-md-2 column productbox">
-          <img src="imagens/prod3.png" class="img-responsive">
-          <div class="producttitle">Product 3</div>
-        <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">£8.95</div></div>
-      </div>
-      <div class="col-md-2 column productbox">
-        <img src="imagens/prod4.png" class="img-responsive">
-        <div class="producttitle">Product 4</div>
-        <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">£8.95</div></div>
-      </div>
-      <div class="col-md-2 column productbox">
-        <img src="imagens/prod2.png" class="img-responsive">
-        <div class="producttitle">Product 2</div>
-        <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">£8.95</div></div>
-      </div>
-      <div class="col-md-2 column productbox">
-        <img src="imagens/prod6.png" class="img-responsive">
-        <div class="producttitle">Product 2</div>
-        <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">£8.95</div></div>
-      </div>
+      <?php while($linha = mysqli_fetch_assoc($resultado_id)) { ?>
+        <div class=" col-sm-6 col-md-2  column productbox">
+          <a href="view/detalhe_prod.php?id_produto=<?php echo$linha['id'] ?>"><img src="<?php echo $linha['imagem'].'.png' ?>" class="img-responsive "></a>
+          <div class="producttitle"><?php echo $linha['nome']?></div>
+          <div class="productprice"><div class="pull-right"><br><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">
+              <?php 
+                  
+                    if($linha['id'] == 1 ){
+                      echo 'R$ '.number_format($linha['preco'],3); 
+                    }else{
+                      echo 'R$ '.number_format($linha['preco'],2); 
+                    }
+                    
 
-      <div class="col-md-2 column productbox">
-        <img src="imagens/prod7.png" class="img-responsive">
-        <div class="producttitle">Product 2</div>
-        <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">£8.95</div></div>
-      </div>
-      <div class="col-md-2 column productbox">
-        <img src="imagens/prod8.png" class="img-responsive">
-        <div class="producttitle">Product 2</div>
-        <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">£8.95</div></div>
-      </div>
-      <div class="col-md-2 column productbox">
-        <img src="imagens/prod9.png" class="img-responsive">
-        <div class="producttitle">Product 2</div>
-        <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">£8.95</div></div>
-      </div>
-      <div class="col-md-2 column productbox">
-        <img src="imagens/prod10.png" class="img-responsive">
-        <div class="producttitle">Product 2</div>
-        <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">£8.95</div></div>
-      </div>
-      <div class="col-md-2 column productbox">
-        <img src="imagens/prod11.png" class="img-responsive">
-        <div class="producttitle">Product 2</div>
-        <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">COMPRAR</a></div><div class="pricetext">£8.95</div></div>
+              ?>
+            
+          </div></div>
         </div>
+        <?php } ?>
+    
+        
       </div>
-      
-   
     </section>
 
 <footer>

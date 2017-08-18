@@ -41,12 +41,16 @@ body {
 }
 
 .form-control {
-	margin-top: 15px;
-	margin-left: 300px;
-    display: inline-block;
+	
     width: 200px;
    
 }
+
+.navbar-form {
+    margin-top: 15px;
+
+}
+
 
 .navbar-inverse .navbar-nav>li>a {
 	color: black;
@@ -69,6 +73,10 @@ body {
 	align-content: center;
 	
 
+}
+
+.resultado{
+	margin-right: 5px;
 }
 
 section #div_destaque{
@@ -113,7 +121,7 @@ ul .dropdown-menu {
 /* config sessao produtos*/
 
 .productbox {
-    background-color:#f8f8f8;;
+    background-color:#f8f8f8;
 	padding:10px;
 	margin-left: 2px;
 	border:0.5px solid #000;
@@ -145,12 +153,8 @@ ul .dropdown-menu {
 	z-index: 2;
 
 }
-#config_container_imagens{
-	margin-right: 28px;
- 	margin-bottom: 28px;
-  padding: 10px;
 
-}
+
 
 /* rodape */
 
@@ -194,7 +198,6 @@ footer a{
 
 
 
-
 @media screen and (max-width: 767px){
 	.navbar-inverse {
     	background-color: #F8F8F8;
@@ -212,16 +215,27 @@ footer a{
     border-color: #ffffff;
 }
 
-
 #slide-div {
 	
 	margin-top: 20px;
 	padding-top: 50px;
-	width: 300px;
-	height: 150px;
+	width: auto;
+	height: 250px;
 
+
+	}
+}
+
+@media screen and (min-width: 992px){
+
+.col-md-2 {
+    width: 300px;
+}
 
 }
+
+
+
 .container .carousel-caption h1{
 	font-size: 15px;
 }
