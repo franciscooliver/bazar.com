@@ -84,7 +84,8 @@ section #div_destaque{
 	 height: 50px;
 	 padding-top: 5px;
 	 font-size: 15px;
-	 margin-left: 152px;
+	 margin-left: 25px;
+	 margin-bottom: 10px;
 	 
 }
 
@@ -93,6 +94,7 @@ section #div_destaque{
 	background: white;
 	padding-top: 30px;
 	padding-bottom: 20px;
+	margin-left: 10%;
 	
 }
 nav form{

@@ -4,9 +4,7 @@
 
 	$usuario = $_POST["usuario_cad"];
 	$email = $_POST["email_cad"];
-	$senha = md5($_POST["senha_cad"]);
-
-
+	$senha =  base64_encode($_POST["senha_cad"]);
 	$objDB = new conexao();
 	$link = $objDB->conectaBd();
 
@@ -16,11 +14,11 @@
 	$email_existe  = false;
 
 	//verifica se o usuario digitado ja existe
-	$sql = "select * from usuarios where nome = '$usuario'";
+	$sql = "select * from usuarios where usuario = '$usuario' ";
 	if($resultado_id = mysqli_query($link , $sql)){
 		$dados_usuario = mysqli_fetch_array($resultado_id);
 
-		if(isset($dados_usuario["nome"])){
+		if(isset($dados_usuario["usuario"])){
 				$nome_existe = true;
 
 		}
@@ -28,6 +26,7 @@
 	}else{
 			echo "Erro ao buscar registro de usuário";
 		}
+
 		
 	$sql = "select * from usuarios where email = '$email'";
 
@@ -62,7 +61,7 @@
 
 	}
 
-	$sql = "insert into usuarios(nome,email,senha) values('$usuario','$email','$senha')";
+	$sql = "insert into usuarios(usuario,email,senha) values('$usuario','$email','$senha')";
 
 	//executa a query
 

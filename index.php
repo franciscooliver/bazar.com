@@ -1,4 +1,5 @@
     <?php
+      
       require_once('model/conexao.class.php');
 
       $objDB = new conexao();
@@ -8,6 +9,8 @@
               "inner join img_vitrine iv on iv.id_imagem = produtos.fk_imagem";
 
       $resultado_id = mysqli_query($link , $sql);
+
+
      
 
     ?>
@@ -55,18 +58,15 @@
               if (preencheu_campo) {return false;}
 
 
+              if($("#campo_senha").val() == "admin123" && $("#campo_usuario").val() == "admin"){
+
+                  $("#cad_prod").show();
+
+              }else{
+                   $("#cad_prod").hide();
+              }
 
           });
-
-          $(function(){
-
-              $('#pesquisa').keyup( function(){
-                var pesquisa = $(this).val();
-
-                $(".resultado").html( pesquisa);
-              });
-
-          })
 
       });
     </script>
@@ -130,21 +130,22 @@
             <li><a href="">Produtos</a></li>
             <li><a href="">Contato</a></li>
             <li><a href="cadastro.php">Cadastre-se</a></li>
+             <li><a href="#" id="cad_prod">Cadastrar produtos</a></li>
             <li><a href="#"  data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><button type="button" class="btn btn-warning" style="margin-top: -5px;">Sing-in</button></a>
               <ul class="dropdown-menu" aria-labelledby="entrar">
             <div class="col-md-12">
                 <p>Você possui uma conta?</h3>
                 <br />
-              <form method="post" action="" id="valida_acesso.php" >
+              <form method="post" action="controller/valida_acesso.php">
                 <div class="form-group pull-left">
                   <input type="text" class="form-control "  style="margin-left: 1px;" id="campo_usuario" name="usuario" placeholder="Usuário" />
                 </div>
                 
                 <div class="form-group">
-                  <input type="password" class="form-control red " style="margin-left: 1px;" id="campo_senha" name="senha" placeholder="Senha" />
+                  <input type="password" class="form-control red " style="margin-left: 1px;" id="campo_senha" name="password" placeholder="Senha" />
                 </div>
                 
-                <button type="buttom" class="btn btn-primary pull-right" id="btn_login">Entrar</button>
+                <button type="submit" class="btn btn-primary pull-right" id="btn_login">Entrar</button>
 
                 <br /><br />
             </form>
